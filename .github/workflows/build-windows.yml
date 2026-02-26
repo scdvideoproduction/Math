@@ -28,7 +28,7 @@ jobs:
     - name: Build with PyInstaller
       shell: bash
       run: |
-        pyinstaller --noconfirm --onedir --windowed --add-data "game/templates;game/templates/" --add-data "game/static;game/static/" --add-data "db.sqlite3;." --hidden-import "config.settings" --hidden-import "django.core.management" --hidden-import "game.apps" desktop_app.py
+        pyinstaller --clean "Math Tug of War.spec"
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
