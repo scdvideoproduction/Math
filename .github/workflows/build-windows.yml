@@ -25,6 +25,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Create empty database file
+      shell: bash
+      run: touch db.sqlite3
+
     - name: Build with PyInstaller
       shell: bash
       run: |
