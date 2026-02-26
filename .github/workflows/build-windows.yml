@@ -1,0 +1,36 @@
+name: Build Windows Executable
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11' # Match your local version, adjust if needed
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build with PyInstaller
+      run: |
+        pyinstaller --noconfirm --onedir --windowed --add-data "game/templates;game/templates/" --add-data "game/static;game/static/" --add-data "db.sqlite3;." --hidden-import "config.settings" --hidden-import "django.core.management" --hidden-import "game.apps" desktop_app.py
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Math-Tug-of-War-Windows
+        path: dist/desktop_app

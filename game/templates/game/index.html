@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Tug of War</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'game/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'game/styles.css' %}">
+</head>
+
+<body>
+    <div class="game-container">
+        <!-- Confetti Canvas -->
+        <canvas id="confetti-canvas"></canvas>
+
+        <!-- Overlay for Winner -->
+        <div id="winner-overlay" class="hidden">
+            <h1 id="winner-text">Player X Wins!</h1>
+            <button id="restart-btn" onclick="startGame()">Play Again</button>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen">
+            <h1>Math Tug of War</h1>
+            <p>Solve math problems correctly and quickly to pull the rope to your side!</p>
+            <div class="controls-info">
+                <div class="player-controls">
+                    <span class="player-badge p1-badge">P1</span>
+                    <p>Enter your answer on the left</p>
+                </div>
+                <div class="player-controls">
+                    <span class="player-badge p2-badge">P2</span>
+                    <p>Enter your answer on the right</p>
+                </div>
+            </div>
+            <button id="start-btn" onclick="startGame()">Start Game</button>
+        </div>
+
+        <!-- The Rope Container -->
+        <div class="rope-system">
+            <img src="{% static 'game/images/kid_pulling_right.png' %}?v=5" class="kid-sprite kid-left"
+                alt="Kid pulling left" id="kid-p1">
+            <div class="rope"></div>
+            <div class="knot" id="knot"></div>
+            <img src="{% static 'game/images/kid_pulling_left.png' %}?v=5" class="kid-sprite kid-right"
+                alt="Kid pulling right" id="kid-p2">
+        </div>
+
+        <!-- Header Counters -->
+        <div class="question-counter hidden" id="q-counter">Round: <span id="q-current">1</span>/50</div>
+
+        <!-- Timer Display -->
+        <div class="timer-display hidden" id="turn-timer">
+            <span id="time-left">5</span>
+        </div>
+
+        <div class="split-screen">
+            <!-- Player 1 Side -->
+            <div class="player-section player1" id="p1-section">
+                <div class="stats-card">
+                    <h2>Player 1</h2>
+                    <div class="score">Score: <span id="p1-score">0</span></div>
+                </div>
+                <div class="gamepad">
+                    <div class="problem-display" id="p1-problem">Ready</div>
+                    <input type="number" id="p1-input" class="answer-input" placeholder="Answer..." disabled>
+                </div>
+                <div class="feedback" id="p1-feedback"></div>
+            </div>
+
+            <!-- Player 2 Side -->
+            <div class="player-section player2" id="p2-section">
+                <div class="stats-card">
+                    <h2>Player 2</h2>
+                    <div class="score">Score: <span id="p2-score">0</span></div>
+                </div>
+                <div class="gamepad">
+                    <div class="problem-display" id="p2-problem">Ready</div>
+                    <input type="number" id="p2-input" class="answer-input" placeholder="Answer..." disabled>
+                </div>
+                <div class="feedback" id="p2-feedback"></div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'game/game.js' %}"></script>
+</body>
+
+</html>
