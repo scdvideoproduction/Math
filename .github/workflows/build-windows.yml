@@ -38,4 +38,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Math-Tug-of-War-Windows
-        path: dist/desktop_app
+        path: "dist/Math Tug of War"
