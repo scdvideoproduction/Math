@@ -11,9 +11,18 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import sys
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Paths for source mode vs PyInstaller-frozen mode.
+if getattr(sys, 'frozen', False):
+    BUNDLE_DIR = Path(getattr(sys, '_MEIPASS', Path(sys.executable).resolve().parent))
+    APP_DIR = Path(sys.executable).resolve().parent
+else:
+    BUNDLE_DIR = Path(__file__).resolve().parent.parent
+    APP_DIR = BUNDLE_DIR
+
+# Use bundled files for templates/static; use app dir for writable runtime files.
+BASE_DIR = BUNDLE_DIR
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +34,7 @@ SECRET_KEY = 'django-insecure-6d&d$wv@ms0w97mw6ml(h-uvq_-o*&5=y65(9@-k8(m@-8%wv2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -76,7 +85,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': APP_DIR / 'db.sqlite3',
     }
 }
 

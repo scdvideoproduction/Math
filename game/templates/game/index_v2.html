@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Tug of War</title>
+    <title>Math Tug of War - V2</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'game/fonts.css' %}">
     <link rel="stylesheet" href="{% static 'game/styles.css' %}">
@@ -23,22 +23,30 @@
 
         <!-- Start Screen -->
         <div id="start-screen">
-            <h1>Math Tug of War</h1>
-            <p>Solve math problems correctly and quickly to pull the rope to your side!</p>
+            <h1>Math Tug of War (V2)</h1>
+            <p><strong>Multiplayer Mode:</strong> Both players answer simultaneously!</p>
+            <p>No need to click the boxes. Just start typing!</p>
             <div class="controls-info">
                 <div class="player-controls">
                     <span class="player-badge p1-badge">P1</span>
-                    <p>Enter your answer on the left</p>
+                    <p><strong>Standard Number Row</strong><br><br>
+                        <code>1-9, 0</code> = Numbers<br>
+                        <code>-</code> = Minus<br>
+                        <code>[Backspace]</code> = Backspace
+                    </p>
                 </div>
                 <div class="player-controls">
                     <span class="player-badge p2-badge">P2</span>
-                    <p>Enter your answer on the right</p>
+                    <p><strong>Numpad</strong><br><br>
+                        <code>1-9, 0</code> = Numbers<br>
+                        <code>-</code> = Minus<br>
+                        <code>[Delete]/[.]</code> = Backspace
+                    </p>
                 </div>
             </div>
             <button id="start-btn" onclick="startGame()">Start Game</button>
             <p style="margin-top: 20px; font-size: 0.9em;">
-                <a href="{% url 'tug_v2' %}" style="color: #fff; text-decoration: underline;">Play Version 2
-                    (Auto-submit, 50 rounds)</a>
+                <a href="{% url 'index' %}" style="color: #fff; text-decoration: underline;">Back to Classic Version</a>
             </p>
         </div>
 
@@ -69,7 +77,8 @@
                 </div>
                 <div class="gamepad">
                     <div class="problem-display" id="p1-problem">Ready</div>
-                    <input type="number" id="p1-input" class="answer-input" placeholder="Answer..." disabled>
+                    <input type="number" id="p1-input" class="answer-input" placeholder="Number Row keys..." readonly
+                        disabled>
                 </div>
                 <div class="feedback" id="p1-feedback"></div>
             </div>
@@ -82,13 +91,14 @@
                 </div>
                 <div class="gamepad">
                     <div class="problem-display" id="p2-problem">Ready</div>
-                    <input type="number" id="p2-input" class="answer-input" placeholder="Answer..." disabled>
+                    <input type="number" id="p2-input" class="answer-input" placeholder="Numpad keys..." readonly
+                        disabled>
                 </div>
                 <div class="feedback" id="p2-feedback"></div>
             </div>
         </div>
     </div>
-    <script src="{% static 'game/game.js' %}"></script>
+    <script src="{% static 'game/game_v2.js' %}"></script>
 </body>
 
 </html>
