@@ -3,8 +3,8 @@
 from pathlib import Path
 from PyInstaller.utils.hooks import collect_data_files
 
-
-project_dir = Path(__file__).resolve().parent
+# SPECPATH is a built-in variable provided by PyInstaller containing the absolute path to this spec file's dir
+project_dir = Path(SPECPATH).resolve()
 
 datas = [
     (str(project_dir / 'game' / 'templates'), 'game/templates'),
